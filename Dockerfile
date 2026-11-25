@@ -2,7 +2,7 @@
 # Контекст сборки на Render — папка amoore-ai-rust/ (Root Directory), Dockerfile лежит в её корне.
 
 # ---------- сборка ----------
-FROM rust:1.80-slim AS builder
+FROM rust:1.88-slim as builder
 WORKDIR /app
 
 # 1) слой с зависимостями: пересобирается только при изменении Cargo.toml / Cargo.lock
