@@ -1,0 +1,26 @@
+[package]
+name = "amoore-ai-rust"
+version = "6.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "amoore — Telegram-бот на Rust (перенос amoore-ai/ с Python, этап 7.0)"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "signal", "sync"] }
+# Типы апдейтов и клиент Bot API. Вебхук принимаем сами через axum (как Flask в Python-версии),
+# поэтому фичи webhooks-* не нужны. TLS — rustls, без системного OpenSSL.
+teloxide = { version = "0.13", default-features = false, features = ["rustls"] }
+axum = { version = "0.7", default-features = false, features = ["http1", "tokio", "json"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
